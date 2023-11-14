@@ -22,9 +22,16 @@ const retrieveUserController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const user: User = await userServices.retrievedUserService(
-    Number(req.params.userId)
-  );
+  return res.status(200).json(res.locals.foundUser);
+};
+
+const upddateUserController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { foundUser } = res.locals;
+  const user: User = await userServices.updateUserService(foundUser, req.body);
+
   return res.status(200).json(user);
 };
 
@@ -32,7 +39,7 @@ const deleteUserController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  await userServices.deleteUserService(Number(req.params.userId));
+  await userServices.deleteUserService(res.locals.foundUser);
   return res.status(204).json();
 };
 
@@ -41,4 +48,5 @@ export default {
   readAllUsersController,
   retrieveUserController,
   deleteUserController,
+  upddateUserController,
 };
