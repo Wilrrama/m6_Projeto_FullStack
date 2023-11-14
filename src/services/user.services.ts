@@ -8,4 +8,10 @@ const createUserService = async (payload: Omit<User, "id">) => {
   return user;
 };
 
-export default { createUserService };
+const readAllUsersService = async (): Promise<Array<User>> => {
+  const repo: Repository<User> = AppDataSource.getRepository(User);
+  const users: Array<User> = await repo.find();
+  return users;
+};
+
+export default { createUserService, readAllUsersService };

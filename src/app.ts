@@ -6,5 +6,6 @@ const app: Application = express();
 app.use(json());
 
 app.post("/users", userControllers.createUserController);
+app.get("/users", userControllers.readeAllUsersController);
 
 export default app;

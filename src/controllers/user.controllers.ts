@@ -10,4 +10,12 @@ const createUserController = async (
   return res.status(201).json(user);
 };
 
-export default { createUserController };
+const readeAllUsersController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const users: Array<User> = await userServices.readAllUsersService();
+  return res.status(200).json(users);
+};
+
+export default { createUserController, readeAllUsersController };
