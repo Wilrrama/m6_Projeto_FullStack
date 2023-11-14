@@ -1,11 +1,10 @@
 import express, { Application, json } from "express";
-import { userControllers } from "./controllers";
+import { userRouter } from "./routes/user.router";
 
 const app: Application = express();
 
 app.use(json());
 
-app.post("/users", userControllers.createUserController);
-app.get("/users", userControllers.readeAllUsersController);
+app.use("/users", userRouter);
 
 export default app;

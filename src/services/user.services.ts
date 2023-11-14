@@ -1,17 +1,38 @@
-import { Repository } from "typeorm";
 import User from "../entities/User.entity";
-import { AppDataSource } from "../data-source";
+import { AppError } from "../errors/AppError.error";
+import { userRepo } from "../repositories";
 
-const createUserService = async (payload: Omit<User, "id">) => {
-  const repo: Repository<User> = AppDataSource.getRepository(User);
-  const user: User = await repo.save(payload);
-  return user;
+const createUserService = async (payload: Omit<User, "id">): Promise<User> => {
+  const newUser: User = await userRepo.save(payload);
+  return newUser;
 };
 
-const readAllUsersService = async (): Promise<Array<User>> => {
-  const repo: Repository<User> = AppDataSource.getRepository(User);
-  const users: Array<User> = await repo.find();
+const readAllUsersService = async (): Promise<User[]> => {
+  const users: User[] = await userRepo.find();
   return users;
 };
 
-export default { createUserService, readAllUsersService };
+const retrievedUserService = async (userId: number): Promise<User> => {
+  const user: User | null = await userRepo.findOne({ where: { id: userId } });
+
+  if (!user) {
+    throw new AppError("User not found", 404);
+  }
+  return user;
+};
+
+const deleteUserService = async (userId: number): Promise<void> => {
+  const user: User | null = await userRepo.findOne({ where: { id: userId } });
+
+  if (!user) {
+    throw new AppError("User not found", 404);
+  }
+  await userRepo.remove(user);
+};
+
+export default {
+  createUserService,
+  readAllUsersService,
+  retrievedUserService,
+  deleteUserService,
+};

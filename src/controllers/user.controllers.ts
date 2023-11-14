@@ -10,12 +10,35 @@ const createUserController = async (
   return res.status(201).json(user);
 };
 
-const readeAllUsersController = async (
+const readAllUsersController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const users: Array<User> = await userServices.readAllUsersService();
+  const users: User[] = await userServices.readAllUsersService();
   return res.status(200).json(users);
 };
 
-export default { createUserController, readeAllUsersController };
+const retrieveUserController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const user: User = await userServices.retrievedUserService(
+    Number(req.params.userId)
+  );
+  return res.status(200).json(user);
+};
+
+const deleteUserController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  await userServices.deleteUserService(Number(req.params.userId));
+  return res.status(204).json();
+};
+
+export default {
+  createUserController,
+  readAllUsersController,
+  retrieveUserController,
+  deleteUserController,
+};
