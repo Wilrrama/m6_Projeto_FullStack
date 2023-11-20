@@ -2,8 +2,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import User from "./User.entity";
 
 @Entity("contacts")
 export default class Contact {
@@ -17,4 +19,6 @@ export default class Contact {
   phone: number;
   @CreateDateColumn({ type: "date" })
   createdAt: string;
+  @ManyToOne(() => User)
+  user: User;
 }

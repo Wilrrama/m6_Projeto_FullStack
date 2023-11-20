@@ -1,12 +1,17 @@
 import { Request, Response } from "express";
 import User from "../entities/User.entity";
 import { userServices } from "../services";
+import {
+  TUserRead,
+  TUserReturn,
+  TUserUpdate,
+} from "../interfaces/user.interfaces";
 
 const createUserController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const user: User = await userServices.createUserService(req.body);
+  const user = await userServices.createUserService(req.body);
   return res.status(201).json(user);
 };
 
@@ -14,7 +19,7 @@ const readAllUsersController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const users: User[] = await userServices.readAllUsersService();
+  const users: TUserRead = await userServices.readAllUsersService();
   return res.status(200).json(users);
 };
 
@@ -30,7 +35,10 @@ const upddateUserController = async (
   res: Response
 ): Promise<Response> => {
   const { foundUser } = res.locals;
-  const user: User = await userServices.updateUserService(foundUser, req.body);
+  const user: TUserUpdate = await userServices.updateUserService(
+    foundUser,
+    req.body
+  );
 
   return res.status(200).json(user);
 };
