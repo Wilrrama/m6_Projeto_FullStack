@@ -5,13 +5,15 @@ import {
   TUserRead,
   TUserReturn,
   TUserUpdate,
+  TUserCreate,
+  TUserResponse,
 } from "../interfaces/user.interfaces";
 
 const createUserController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const user = await userServices.createUserService(req.body);
+  const user: TUserReturn = await userServices.createUserService(req.body);
   return res.status(201).json(user);
 };
 

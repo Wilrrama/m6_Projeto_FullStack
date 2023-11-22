@@ -8,8 +8,13 @@ export const verifyContactId = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const foundContact: Contact | null = await contactRepo.findOneBy({
-    id: Number(req.params.contactId),
+  const foundContact: Contact | null = await contactRepo.findOne({
+    where: {
+      id: Number(req.params.contactId),
+    },
+    relations: {
+      user: true,
+    },
   });
 
   if (!foundContact) throw new AppError("Contact not found.", 404);

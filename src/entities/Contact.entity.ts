@@ -13,12 +13,12 @@ export default class Contact {
   id: number;
   @Column({ length: 45 })
   full_name: string;
-  @Column({ length: 45, unique: true })
+  @Column({ length: 45, unique: false })
   email: string;
   @Column({ type: "int" })
   phone: number;
   @CreateDateColumn({ type: "date" })
   createdAt: string;
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, (user) => user.contacts, { onDelete: "CASCADE" })
   user: User;
 }

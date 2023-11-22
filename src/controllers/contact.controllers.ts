@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
 import Contact from "../entities/Contact.entity";
 import { contactServices } from "../services";
+import User from "../entities/User.entity";
 
 const createContactController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const contact: Contact = await contactServices.createContactService(req.body);
+  // const userId = res.locals.userId;
+  const contact = await contactServices.createContactService(req.body);
   return res.status(201).json(contact);
 };
 

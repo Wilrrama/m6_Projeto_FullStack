@@ -1,12 +1,25 @@
-import { contactRepo } from "../repositories";
+import { contactRepo, userRepo } from "../repositories";
 import Contact from "../entities/Contact.entity";
+import {
+  TContactCreate,
+  TContactReturn,
+} from "../interfaces/contact.interfaces";
+import User from "../entities/User.entity";
+import { AppError } from "../errors/AppError.error";
+import { contactCreateSchema, contactSchema } from "../schemas/contact.schemas";
 
-const createContactService = async (
-  payload: Omit<Contact, "id">
-): Promise<Contact> => {
-  const newContact: Contact = contactRepo.create(payload);
+const createContactService = async (payload: TContactCreate): Promise<any> => {
+  const user = await userRepo.findOne({
+    where: { id: payload.userId },
+  });
+
+  if (!user) {
+    throw new AppError("User not found", 404);
+  }
+  const newContact: Contact = contactRepo.create({ ...payload, user });
   const saveContact = await contactRepo.save(newContact);
 
+  // return contactCreateSchema.parse(saveContact);
   return saveContact;
 };
 

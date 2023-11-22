@@ -26,16 +26,16 @@ const readAllUsersService = async (): Promise<TUserRead> => {
   return usersReadSchema.parse(users);
 };
 
+const deleteUserService = async (user: User): Promise<void> => {
+  await userRepo.remove(user);
+};
+
 const updateUserService = async (
   user: User,
   payload: TUserUpdate
 ): Promise<TUserUpdate> => {
   const updateUser = await userRepo.save({ ...user, ...payload });
   return userUpdateSchema.parse(updateUser);
-};
-
-const deleteUserService = async (user: User): Promise<void> => {
-  await userRepo.remove(user);
 };
 
 export default {

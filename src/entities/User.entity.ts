@@ -1,9 +1,14 @@
+import { getRounds, hashSync } from "bcryptjs";
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import Contact from "./Contact.entity";
 
 @Entity("users")
 export default class User {
@@ -19,4 +24,6 @@ export default class User {
   phone: number;
   @CreateDateColumn({ type: "date" })
   createdAt: string;
+  @OneToMany(() => Contact, (contact) => contact.user)
+  contacts: Contact[];
 }
