@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Contact from "../entities/Contact.entity";
 import { contactServices } from "../services";
 import User from "../entities/User.entity";
+import { TContactRead } from "../interfaces/contact.interfaces";
 
 const createContactController = async (
   req: Request,
@@ -16,7 +17,7 @@ const readAllContactsController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const contacts: Contact[] = await contactServices.readAllContactsService();
+  const contacts: TContactRead = await contactServices.readAllContactsService();
   return res.status(200).json(contacts);
 };
 

@@ -3,10 +3,15 @@ import Contact from "../entities/Contact.entity";
 import {
   TContactCreate,
   TContactReturn,
+  TContactRead,
 } from "../interfaces/contact.interfaces";
 import User from "../entities/User.entity";
 import { AppError } from "../errors/AppError.error";
-import { contactCreateSchema, contactSchema } from "../schemas/contact.schemas";
+import {
+  contactCreateSchema,
+  contactSchema,
+  contactResponseSchema,
+} from "../schemas/contact.schemas";
 
 const createContactService = async (payload: TContactCreate): Promise<any> => {
   const user = await userRepo.findOne({
@@ -19,12 +24,11 @@ const createContactService = async (payload: TContactCreate): Promise<any> => {
   const newContact: Contact = contactRepo.create({ ...payload, user });
   const saveContact = await contactRepo.save(newContact);
 
-  // return contactCreateSchema.parse(saveContact);
-  return saveContact;
+  return contactResponseSchema.parse(saveContact);
 };
 
-const readAllContactsService = async (): Promise<Contact[]> => {
-  const contacts: Contact[] = await contactRepo.find();
+const readAllContactsService = async (): Promise<TContactRead> => {
+  const contacts: TContactRead = await contactRepo.find();
   return contacts;
 };
 

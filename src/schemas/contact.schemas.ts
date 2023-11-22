@@ -17,12 +17,20 @@ const contactCreateSchema = contactSchema.omit({
   createdAt: true,
 });
 
+const contactResponseSchema = contactSchema.omit({
+  id: true,
+  user: true,
+  createdAt: true,
+  userId: true,
+});
+
 const contactUpdateSchema = contactCreateSchema.partial();
-const contactReadSchema = contactSchema.array();
+const contactReadSchema = contactResponseSchema.array();
 
 export {
   contactSchema,
   contactCreateSchema,
   contactUpdateSchema,
   contactReadSchema,
+  contactResponseSchema,
 };

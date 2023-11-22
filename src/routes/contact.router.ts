@@ -6,8 +6,6 @@ import {
   contactCreateSchema,
   contactUpdateSchema,
 } from "../schemas/contact.schemas";
-import { verifyContactPhoneForUserId } from "../middlewares/verifyContactPhone.middleware";
-import { verifyContactEmailForUserId } from "../middlewares/verifyContactEmail.middleware";
 
 export const contactRouter: Router = Router();
 
