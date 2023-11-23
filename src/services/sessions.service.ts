@@ -1,5 +1,5 @@
 import { compare } from "bcryptjs";
-import User from "../entities/User.entity";
+import { User } from "../entities/user.entitie";
 import { AppError } from "../errors/AppError.error";
 import {
   TSessionCreate,
@@ -14,10 +14,10 @@ const createSessionService = async ({
   password,
 }: TSessionCreate): Promise<TSessionReturn> => {
   const foundUser: User | null = await userRepo.findOneBy({ email });
-  if (!foundUser) throw new AppError("Invalid credentials", 401);
+  if (!foundUser) throw new AppError("Dados Inválidos", 401);
 
   const samePwd: boolean = await compare(password, foundUser.password);
-  if (!samePwd) throw new AppError("Invalid credentials", 401);
+  if (!samePwd) throw new AppError("Dados Inválidos", 401);
 
   const token: string = sign(
     { name: foundUser.full_name },
@@ -28,4 +28,4 @@ const createSessionService = async ({
   return { token };
 };
 
-export default { createSessionService };
+export { createSessionService };

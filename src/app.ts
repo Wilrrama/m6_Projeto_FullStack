@@ -1,15 +1,15 @@
+import "reflect-metadata";
 import "express-async-errors";
-import express, { Application, json } from "express";
-import { userRouter } from "./routes/user.router";
+import express from "express";
+import { usersRoutes } from "./routes/users.routes";
 import { handleError } from "./middlewares/handleError.middleware";
-import { contactRouter } from "./routes/contact.router";
-import { sessionRouter } from "./routes/session.router";
+import { sessionRouter } from "./routes/sessions.routes";
 
-const app: Application = express();
+const app = express();
 
-app.use(json());
-app.use("/users", userRouter);
-app.use("/contacts", contactRouter);
+app.use(express.json());
+
+app.use("/users", usersRoutes);
 app.use("/login", sessionRouter);
 app.use(handleError);
 

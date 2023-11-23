@@ -1,9 +1,5 @@
-import { Repository } from "typeorm";
 import { AppDataSource } from "./data-source";
-import User from "./entities/User.entity";
-import Contact from "./entities/Contact.entity";
-import { TContactRepo } from "./interfaces/contact.interfaces";
-import { TUserRepo } from "./interfaces/user.interfaces";
+import { User } from "./entities/user.entitie";
+import { TUserRepo } from "./interfaces/users.interfaces";
 
 export const userRepo: TUserRepo = AppDataSource.getRepository(User);
-export const contactRepo: TContactRepo = AppDataSource.getRepository(Contact);

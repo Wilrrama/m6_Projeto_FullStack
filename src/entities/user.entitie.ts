@@ -2,23 +2,28 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import User from "./User.entity";
 
-@Entity("contacts")
-export default class Contact {
+@Entity("users")
+class User {
   @PrimaryGeneratedColumn("increment")
   id: number;
-  @Column({ length: 45 })
+
+  @Column()
   full_name: string;
-  @Column({ length: 45, unique: false })
+
+  @Column({ unique: true })
   email: string;
+
+  @Column({ length: 120 })
+  password: string;
+
   @Column({ type: "int" })
   phone: number;
+
   @CreateDateColumn({ type: "date" })
   createdAt: string;
-  @ManyToOne(() => User, (user) => user.contacts, { onDelete: "CASCADE" })
-  user: User;
 }
+
+export { User };

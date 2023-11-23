@@ -1,25 +1,25 @@
-import "reflect-metadata";
-import "dotenv/config";
+import path from "node:path";
 import { DataSource, DataSourceOptions } from "typeorm";
-import path from "path";
+import "dotenv/config";
 
-const dataSourceConfig = (): DataSourceOptions => {
-  const entitiesPath: string = path.join(__dirname, "./entities/**.{ts,js}");
-  const migrationPath: string = path.join(__dirname, "./migrations/**.{ts,js}");
-  const dbUrl: string | undefined = process.env.DATABASE_URL;
+const DataSourceConfig = (): DataSourceOptions => {
+  const entitiesPath = path.join(__dirname, "entities/**.{js,ts}");
+  const migrationsPath = path.join(__dirname, "migrations/**.{js,ts}");
 
-  if (!dbUrl) throw new Error("Missing env var: 'DATABASE_URL'");
+  if (!process.env.DATABASE_URL) {
+    throw new Error("Env var DATABASE_URL does not exists");
+  }
 
   return {
     type: "postgres",
-    url: dbUrl,
+    url: process.env.DATABASE_URL,
+    synchronize: false,
     logging: true,
-    synchronize: true,
     entities: [entitiesPath],
-    migrations: [migrationPath],
+    migrations: [migrationsPath],
   };
 };
 
-const AppDataSource = new DataSource(dataSourceConfig());
+const AppDataSource = new DataSource(DataSourceConfig());
 
 export { AppDataSource };

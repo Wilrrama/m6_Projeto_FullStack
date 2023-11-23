@@ -9,7 +9,9 @@ export const handleError = (
   next: NextFunction
 ): Response => {
   if (error instanceof AppError) {
-    return res.status(error.status).json({ message: error.message });
+    return res.status(error.statusCode).json({
+      message: error.message,
+    });
   }
 
   if (error instanceof ZodError) {
