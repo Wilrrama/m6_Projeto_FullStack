@@ -3,6 +3,7 @@ import {
   createContactService,
   deleteContactService,
   readAllContactService,
+  readByIdContactService,
   updateContactService,
 } from "../services/contacts.service";
 
@@ -50,9 +51,19 @@ const updateContactController = async (
   return res.json(updateTask);
 };
 
+const readByIdContactController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const contactId: number = Number(req.params.id);
+  const contacts = await readByIdContactService(contactId);
+  return res.json(contacts);
+};
+
 export {
   createContactController,
   readContactController,
   deleteContactController,
   updateContactController,
+  readByIdContactController,
 };

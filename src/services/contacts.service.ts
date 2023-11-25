@@ -3,16 +3,15 @@ import {
   TContact,
   TContactRequest,
   TContactResponse,
-  TContactUpdate,
   TContactsResponse,
 } from "../interfaces/contacts.interfaces";
 import { contactRepo, userRepo } from "../repositories";
+import { contactSchemaResponse } from "../schemas/contacts.schema";
 
 const createContactService = async (
   payload: TContactRequest,
   userId: number
 ): Promise<TContactResponse> => {
-  // Verifica se o usuário existe
   const user = await userRepo.findOne({
     where: {
       id: userId,
@@ -21,7 +20,6 @@ const createContactService = async (
 
   if (!user) throw new AppError("Usuário não encontrado", 404);
 
-  // Verifica se o e-mail ou telefone já estão cadastrados para o usuário
   const existingContact = await contactRepo.findOne({
     where: [
       { email: payload.email, user },
@@ -37,7 +35,6 @@ const createContactService = async (
     }
   }
 
-  // Se tudo estiver correto, cria o contato
   const contact: TContact = contactRepo.create({
     ...payload,
     user,
@@ -45,7 +42,7 @@ const createContactService = async (
 
   await contactRepo.save(contact);
 
-  return contact;
+  return contactSchemaResponse.parse(contact);
 };
 
 const readAllContactService = async (
@@ -97,9 +94,24 @@ const updateContactService = async (
   return newTaskData;
 };
 
+const readByIdContactService = async (
+  contactId: number
+): Promise<TContactResponse> => {
+  const contact = await contactRepo.findOne({
+    where: { id: contactId },
+  });
+
+  if (!contact) {
+    throw new AppError("Contato não encontrado", 404);
+  }
+
+  return contactSchemaResponse.parse(contact);
+};
+
 export {
   createContactService,
   readAllContactService,
   deleteContactService,
   updateContactService,
+  readByIdContactService,
 };
