@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
+import { number } from "zod";
 
 export const ensureAuthMiddleware = (
   req: Request,

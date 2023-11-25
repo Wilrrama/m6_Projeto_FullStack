@@ -56,6 +56,9 @@ const readUsersByIdService = async (id: number) => {
     where: {
       id,
     },
+    relations: {
+      contacts: true,
+    },
   });
 
   if (!user) {
