@@ -2,13 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { User } from "./user.entitie";
+import { Contact } from "./contact.entitie";
 
-@Entity("contacts")
-class Contact {
+@Entity("users")
+class User {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
@@ -18,14 +18,17 @@ class Contact {
   @Column({ unique: true })
   email: string;
 
-  @Column({ type: "int", width: 11 })
-  phone: number;
+  @Column({ length: 120 })
+  password: string;
+
+  @Column()
+  phone: string;
 
   @CreateDateColumn({ type: "date" })
   createdAt: string;
 
-  @ManyToOne(() => User, { onDelete: "CASCADE" })
-  user: User;
+  @OneToMany(() => Contact, (contact) => contact.user)
+  contacts: Contact[];
 }
 
-export { Contact };
+export { User };

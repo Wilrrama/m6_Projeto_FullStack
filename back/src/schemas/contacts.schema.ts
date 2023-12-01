@@ -5,7 +5,7 @@ const contactSchema = z.object({
   id: z.number().positive(),
   full_name: z.string(),
   email: z.string().email(),
-  phone: z.number().positive(),
+  phone: z.string(),
   createdAt: z.string(),
   user: userSchema,
 });

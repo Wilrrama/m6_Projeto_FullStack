@@ -2,10 +2,10 @@ import { z } from "zod";
 
 const userSchema = z.object({
   id: z.number().positive(),
-  full_name: z.string().max(150),
+  full_name: z.string(),
   email: z.string().email(),
   password: z.string(),
-  phone: z.number().positive(),
+  phone: z.string(),
   createdAt: z.string(),
 });
 
