@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
 import { loginSchema } from "./validator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAuth } from "../../../hooks/useAuth";
 import { StyledControllerLogin } from "./styles";
 import { Link } from "react-router-dom";
-import { Form } from "../../../fragments/Form";
-import { Input } from "../../../fragments/Input";
-import { Button } from "../../../fragments/Button";
+
+import { Form } from "../../fragments/Form";
+import { Input } from "../../fragments/Input";
+import { Button } from "../../fragments/Button";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Login = () => {
   const {
@@ -20,7 +21,6 @@ export const Login = () => {
   const { userLogin } = useAuth();
 
   const submitLogin = (formData) => {
-    console.log(formData);
     userLogin(formData);
     reset();
   };

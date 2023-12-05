@@ -11,7 +11,19 @@ export const DashboardHeader = styled.header`
   display: flex;
   align-items: center;
   padding-top: 5px;
-  padding-bottom: 5px;
+  padding-bottom: 3px;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+  }
+`;
+
+export const PDFButton = styled.button`
+  color: tomato;
+  font-size: 23px;
+  font-weight: 700;
 `;
 
 export const UpdateButton = styled.button`
@@ -22,14 +34,15 @@ export const UpdateButton = styled.button`
 
 export const DeleteUserButton = styled.button`
   color: red;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 700;
 `;
 
 export const ButtonContainerUser = styled.div`
   display: flex;
-  align-items: center;
-  gap: 50px;
+  flex-direction: row;
+  /* align-items: center; */
+  gap: 10px;
 `;
 
 export const ExitButton = styled.button`
@@ -42,14 +55,15 @@ export const ExitButton = styled.button`
 `;
 
 export const User = styled.div`
-  display: flex;
-  align-items: center;
+  /* display: flex; */
+  /* align-items: center; */
+  font-size: 15px;
 `;
 
 export const UserContact = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
   gap: 5px;
   flex-wrap: wrap;
   font-size: 15px;
@@ -84,14 +98,18 @@ export const ContactList = styled.ul`
   margin-left: 1%;
   margin-right: 1%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 3%;
 
   li {
+    width: 220px;
     border: black 3px solid;
     display: flex;
+    //flex-direction: column;
     margin-bottom: 5px;
-    flex-direction: column;
+    justify-content: space-around;
   }
 `;
 
@@ -134,8 +152,10 @@ export const ContactContainer = styled.div`
 
 export const ButtonContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 5px;
   justify-content: space-around;
-  margin-top: 1px;
+  margin-top: 5px;
 `;
 
 export const UpdateButtonContact = styled.button`

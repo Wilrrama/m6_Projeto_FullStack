@@ -1,22 +1,21 @@
-import { useContact } from "../../../../hooks/useContact";
 import { IoMdPerson } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { FaSquarePhone } from "react-icons/fa6";
 import { GrDocumentUpdate } from "react-icons/gr";
 import { MdDeleteForever } from "react-icons/md";
 import { useState } from "react";
-
 import {
   ContactContainer,
   ContactName,
   ContactEmail,
   ContactPhone,
-  ContactCreated,
   ButtonContainer,
   UpdateButtonContact,
   DeleteButtonContact,
 } from "../styles";
-import { ModalUpdateContact } from "../../../../components/ModalUpdateContact";
+
+import { useContact } from "../../../hooks/useContact";
+import { ModalUpdateContact } from "../../../components/ModalUpdateContact";
 
 export const Contacts = () => {
   const { deleteContact, contactList } = useContact();

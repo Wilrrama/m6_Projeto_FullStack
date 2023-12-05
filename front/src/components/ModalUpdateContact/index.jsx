@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useEffect } from "react"; // Importe o useEffect
+import { useEffect } from "react";
 import { Modal } from "../Modal";
 import { Input } from "../../fragments/Input";
 import { Form } from "../../fragments/Form";

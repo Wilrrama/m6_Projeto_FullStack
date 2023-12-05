@@ -5,11 +5,11 @@ export const StyledControllerLogin = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 2%;
+  margin-top: 10px;
 
   h1 {
     font-size: 1.5rem;
-    margin-bottom: 2px;
+    margin-bottom: 10px;
   }
 
   div {
@@ -17,7 +17,7 @@ export const StyledControllerLogin = styled.main`
       margin-bottom: 2px;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 15px;
 
       input {
         display: flex;
@@ -56,7 +56,7 @@ export const StyledControllerLogin = styled.main`
   }
 
   h3 {
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1rem;
     margin: 5px;
   }
@@ -77,15 +77,3 @@ export const StyledControllerLogin = styled.main`
     color: #c10228;
   }
 `;
-
-function getBackgroundColor(primaryColor) {
-  switch (primaryColor) {
-    case "#3498db": // Azul
-      return "green"; // Cor de fundo para azul
-    case "#000000": // Preto
-      return "yellow"; // Cor de fundo para preto
-    // Adicione outros casos conforme necessário
-    default:
-      return "transparent"; // Cor de fundo padrão
-  }
-}

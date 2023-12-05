@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import { Login } from "../assets/pages/login";
-import { Register } from "../assets/pages/register";
-import { Dashboard } from "../assets/pages/dashboard";
+import { Login } from "../pages/login";
+import { Register } from "../pages/register";
+import { Dashboard } from "../pages/dashboard";
 
 export const RoutesMain = () => {
   return (

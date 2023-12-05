@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
-import { Form } from "../../../fragments/Form";
-import { Input } from "../../../fragments/Input";
 import {
   StyledButtonBack,
   StyledButtonContainerRegister,
   StyledControllerRegister,
   StyledButtonRegister,
 } from "./styles";
-import { useAuth } from "../../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "./validator";
+import { Form } from "../../fragments/Form";
+import { Input } from "../../fragments/Input";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Register = () => {
   const {

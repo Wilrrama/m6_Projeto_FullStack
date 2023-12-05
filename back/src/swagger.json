@@ -1,0 +1,491 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Projeto FullStack",
+    "description": "Agenda de Contatos. Crud de Usuários do Sistema, cada usuário possui um Crud de contatos",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Development env"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "description": "Rota responsável por registrar um usuário no Sistema",
+        "tags": ["Rotas sem autenticação"],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": 1,
+                      "full_name": "Solange Marcelino",
+                      "email": "sol@mail.com",
+                      "phone": "987654321",
+                      "createdAt": "2023-11-29"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{}]
+      },
+      "get": {
+        "description": "Rota responsável por listar todos os usuários do Sistema",
+        "tags": ["Rotas sem autenticação"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "full_name": "Solange Marcelino",
+                        "email": "sol@mail.com",
+                        "phone": "987654321",
+                        "createdAt": "2023-11-29"
+                      },
+                      {
+                        "id": 5,
+                        "full_name": "Wilson Alves Franchi dos Santos",
+                        "email": "wilrrama@hotmail.com",
+                        "phone": "+5519982876099",
+                        "createdAt": "2023-11-29"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{}]
+      }
+    },
+    "/users/id": {
+      "patch": {
+        "description": "Rota responsável por alterar dodos dos usuários do Sistema",
+        "tags": ["Rotas com autenticação"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": 2,
+                      "full_name": "Wilson Franchi Alves dos Santos",
+                      "email": "wilrrama@mail.com",
+                      "phone": 123456789,
+                      "createdAt": "2023-11-23"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{}]
+      },
+      "get": {
+        "description": "Rota responsável por listar um usuário do Sistema com o seu respectivo id",
+        "tags": ["Rotas sem autenticação"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": 2,
+                      "full_name": "Wilson Franchi Alves dos Santos",
+                      "email": "wil@mail.com",
+                      "phone": 123456789,
+                      "createdAt": "2023-11-23"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Rota responsável por deletar usuário do Sistema",
+        "tags": ["Rotas com autenticação"],
+        "responses": {
+          "204": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "response": {
+                    "value": ["no content"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "Rota responsável por gerar um Token e dar acesso ao Sistema de cadatro de contatos.",
+        "tags": ["Rotas sem autenticação"],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiU29sYW5nZSBNYXJjZWxpbm8iLCJpYXQiOjE3MDE0MTkxMDksImV4cCI6MTcwMTQyMjcwOSwic3ViIjoiMSJ9.2xZcOkeN8CTnzfuwrdtHsq66sBAU-O00Z-rkMTiijmU"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts": {
+      "post": {
+        "description": "Rota responsável por registrar um contato, para o usuário do Sistema",
+        "tags": ["Rotas com autenticação"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "full_name": "Isabela Marcelino",
+                        "email": "isa@mail.com",
+                        "phone": "5511993103079"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Rota responsável por listar todos os contatos de um usuário do Sistema",
+        "tags": ["Rotas com autenticação"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "id": 3,
+                        "full_name": "Denise",
+                        "email": "ded@mail.com",
+                        "phone": "1234",
+                        "createdAt": "2023-11-29"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/id": {
+      "patch": {
+        "description": "Rota responsável por aualizar qualquer dados do contato de um usuário do Sistema",
+        "tags": ["Rotas com autenticação"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "id": 3,
+                        "full_name": "Denise",
+                        "email": "ded@mail.com",
+                        "phone": "1234",
+                        "createdAt": "2023-11-29"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Rota responsável por obter dados de um contato do usuário do Sistema",
+        "tags": ["Rotas com autenticação"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "id": 3,
+                        "full_name": "Denise",
+                        "email": "ded@mail.com",
+                        "phone": "1234",
+                        "createdAt": "2023-11-29"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Rota responsável por deleter um contado do usuário do Sistema",
+        "tags": ["Rotas com autenticação"],
+        "responses": {
+          "204": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "response": {
+                    "value": ["no content"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "createUser": {
+        "type": "object",
+        "properties": {
+          "full_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      },
+      "readUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "full_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      },
+      "readAllUsers": {
+        "type": "array",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "full_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      },
+      "updateUser": {
+        "type": "object",
+        "properties": {
+          "full_name?": {
+            "type": "string"
+          },
+          "email?": {
+            "type": "string"
+          },
+          "password?": {
+            "type": "string"
+          },
+          "phone?": {
+            "type": "string"
+          },
+          "createdAt?": {
+            "type": "string"
+          }
+        }
+      },
+      "createContact": {
+        "type": "object",
+        "properties": {
+          "full_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      },
+      "readContact": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "full_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      },
+      "readAllContacts": {
+        "type": "array",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "full_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      },
+      "updateContact": {
+        "type": "object",
+        "properties": {
+          "full_name?": {
+            "type": "string"
+          },
+          "email?": {
+            "type": "string"
+          },
+          "password?": {
+            "type": "string"
+          },
+          "phone?": {
+            "type": "string"
+          },
+          "createdAt?": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "JWT": []
+    }
+  ]
+}

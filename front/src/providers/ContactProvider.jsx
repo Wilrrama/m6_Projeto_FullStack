@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 import { toast } from "react-toastify";
 
@@ -8,6 +8,7 @@ export const ContactProvider = ({ children }) => {
   const [contactList, setContactList] = useState([]);
   const [contactId, setContactId] = useState(null);
 
+  useEffect(() => {}, []);
   const createContact = async (formData) => {
     try {
       const response = await api.post("/contacts", formData);
