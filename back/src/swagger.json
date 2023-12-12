@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://projetofullstack.vercel.app",
+      "url": "http://localhost:3000",
       "description": "Development env"
     }
   ],
